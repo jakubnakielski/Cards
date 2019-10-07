@@ -14,7 +14,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  //   outline: 1px solid black;
+  // outline: 1px solid black;
 }
 
 .container {
@@ -57,10 +57,12 @@ body {
       cursor: pointer;
       margin: 12px;
       transition: 0.2s;
-      filter: grayscale(1);
+      filter: brightness(70%);
+      background-image: url("../img/karta.png");
+      background-size: cover;
 
       &:hover {
-        filter: grayscale(0);
+        filter: brightness(120%);
         border-color: rgb(214, 166, 43);
       }
     }
