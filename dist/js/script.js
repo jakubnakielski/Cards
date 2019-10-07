@@ -15,20 +15,29 @@ const cards = [
   "5.png",
   "6.png"
 ];
+
+cards.sort(() => {
+  return Math.random() - 0.5;
+});
+
+let oneRevealed;
+let secondRevealed;
+
 const revealCard = el => {
   let cardId = el.target.id;
   cardId = cardId.substr(1);
-  console.log(cardId);
+
+  if (cards[cardId] == oneRevealed) {
+    console.log("takie same");
+  }
 
   style.innerHTML = `
-  
-  
   #${el.target.id} {
     background: url('./img/${cards[cardId]}');
     background-size: cover;
-  }
-  
-  `;
+  } `;
+
+  oneRevealed = cards[cardId];
 };
 
 const c0 = document.getElementById("c0");
