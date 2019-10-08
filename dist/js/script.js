@@ -19,39 +19,50 @@ const cards = [
   "6.png"
 ];
 
-console.log(cards);
-
 cards.sort(() => {
   return Math.random() - 0.5;
 });
 
+const countTurn = () => {
+  turnCounter++;
+  turnCounterBox.innerHTML = `Turn counter: ${turnCounter}`;
+};
+
 let oneRevealed;
 let oneRevealedId;
+let actualCard;
 
 const revealCard = el => {
   let cardId = el.target.id;
 
   cardId = cardId.substr(1);
 
-  if (cards[cardId] == oneRevealed) {
-    console.log(cards[cardId]);
+  if (cardId == actualCard) {
+    return false;
+  }
 
+  if (cards[cardId] == oneRevealed) {
     const firstCard = document.getElementById(`${oneRevealedId}`);
     firstCard.style.visibility = `hidden`; //firstCard
     el.target.style.visibility = `hidden`; //secondCard
-    turnCounter++;
-    turnCounterBox.innerHTML = `Turn counter: ${turnCounter}`;
-  } else {
+    countTurn();
   }
-
   style.innerHTML = `
-  #${el.target.id} {
-    background: url('./img/${cards[cardId]}');
-    background-size: cover;
-  } `;
+    #${el.target.id} {
+      background: url('./img/${cards[cardId]}');
+      background-size: cover;
+    } `;
 
   oneRevealed = cards[cardId];
   oneRevealedId = el.target.id;
+
+  actualCard = cardId;
+
+  if (turnCounter >= 6) {
+    setTimeout(() => {
+      alert("WYGRAŁEŚ");
+    }, 1000);
+  }
 };
 
 const c0 = document.getElementById("c0");
