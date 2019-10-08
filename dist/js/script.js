@@ -88,3 +88,5 @@ for (i = 0; i <= 11; i++) {
 for (i = 0; i <= 11; i++) {
   card[i].addEventListener("click", revealCard);
 }
+
+// correct the counter
