@@ -57,7 +57,7 @@ body {
       cursor: pointer;
       margin: 12px;
       transition: 0.3s;
-      filter: brightness(70%);
+      filter: brightness(80%);
       background-image: url("../img/karta.png");
       background-size: cover;
 
@@ -80,4 +80,10 @@ body {
       font-size: 2em;
     }
   }
+}
+
+.pair {
+  background-size: cover !important;
+  filter: brightness(120%) !important;
+  border-color: rgb(214, 166, 43) !important;
 }

@@ -28,13 +28,28 @@ const countTurn = () => {
   turnCounterBox.innerHTML = `Turn counter: ${turnCounter}`;
 };
 
+function hideCards(first, second) {
+  setTimeout(() => {
+    first.style.visibility = `hidden`; //firstCard
+    second.style.visibility = `hidden`; //secondCard
+  }, 500);
+}
+const highlightCard = (first, second, cards, cardId) => {
+  second.style.background = `url('./img/${cards[cardId]}')`;
+  console.log(second);
+  second.classList.add("pair");
+  first.classList.add("pair");
+  hideCards(first, second);
+  console.log(first);
+  console.log(second);
+};
+
 let oneRevealed;
 let oneRevealedId;
 let actualCard;
 
 const revealCard = el => {
   let cardId = el.target.id;
-
   cardId = cardId.substr(1);
 
   if (cardId == actualCard) {
@@ -43,15 +58,16 @@ const revealCard = el => {
 
   if (cards[cardId] == oneRevealed) {
     const firstCard = document.getElementById(`${oneRevealedId}`);
-    firstCard.style.visibility = `hidden`; //firstCard
-    el.target.style.visibility = `hidden`; //secondCard
+
+    highlightCard(firstCard, el.target, cards, cardId);
     countTurn();
-  }
-  style.innerHTML = `
+  } else {
+    style.innerHTML = `
     #${el.target.id} {
       background: url('./img/${cards[cardId]}');
       background-size: cover;
     } `;
+  }
 
   oneRevealed = cards[cardId];
   oneRevealedId = el.target.id;
@@ -61,15 +77,14 @@ const revealCard = el => {
   if (turnCounter >= 6) {
     setTimeout(() => {
       alert("WYGRAŁEŚ");
-    }, 1000);
+    }, 2000);
   }
 };
 
-const c0 = document.getElementById("c0");
 const c1 = document.getElementById("c1");
 const c2 = document.getElementById("c2");
 const c3 = document.getElementById("c3");
-const c4 = document.getElementById("c4");
+const c4 = document.getElementById("c4"); // MAKE ARRAY
 const c5 = document.getElementById("c5");
 const c6 = document.getElementById("c6");
 const c7 = document.getElementById("c7");
