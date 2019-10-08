@@ -1,6 +1,9 @@
 const style = document.createElement("style");
 document.head.appendChild(style);
 
+let turnCounter = 0;
+const turnCounterBox = document.querySelector(".counter__paragraph>i");
+
 const cards = [
   "1.png",
   "2.png",
@@ -16,19 +19,29 @@ const cards = [
   "6.png"
 ];
 
+console.log(cards);
+
 cards.sort(() => {
   return Math.random() - 0.5;
 });
 
 let oneRevealed;
-let secondRevealed;
+let oneRevealedId;
 
 const revealCard = el => {
   let cardId = el.target.id;
+
   cardId = cardId.substr(1);
 
   if (cards[cardId] == oneRevealed) {
-    console.log("takie same");
+    console.log(cards[cardId]);
+
+    const firstCard = document.getElementById(`${oneRevealedId}`);
+    firstCard.style.visibility = `hidden`; //firstCard
+    el.target.style.visibility = `hidden`; //secondCard
+    turnCounter++;
+    turnCounterBox.innerHTML = `Turn counter: ${turnCounter}`;
+  } else {
   }
 
   style.innerHTML = `
@@ -38,6 +51,7 @@ const revealCard = el => {
   } `;
 
   oneRevealed = cards[cardId];
+  oneRevealedId = el.target.id;
 };
 
 const c0 = document.getElementById("c0");
